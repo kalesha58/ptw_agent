@@ -1,8 +1,8 @@
 // /backend/index.js
 import express from "express";
 import bodyParser from "body-parser";
-import dummyPermits from "./dummy.js";
-import chatRouter from "./routes/chat.js";
+import dummyPermits from "../dummy.js";
+import chatRouter from "../routes/chat.js";
 const app = express();
 app.use(bodyParser.json());
 
