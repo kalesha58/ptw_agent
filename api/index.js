@@ -9,6 +9,10 @@ app.use(bodyParser.json());
 app.use('/api/chat', chatRouter);
 
 
+app.get("/", (req, res) => {
+  res.send("Hello, I am the Permit Management Agent!");
+});
+
 // Utility to find a permit by ID (case‑insensitive)
 function findPermitById(id) {
   return dummyPermits.find(
