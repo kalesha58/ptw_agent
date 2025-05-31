@@ -1,3 +1,55 @@
+
+# ptw_agent
+
+## Project Overview
+
+**ptw_agent** is an AI-powered assistant designed to support a digital **Permit to Work (PTW)** system. It provides backend services built with **Express.js**, handling work permit-related queries and simulating intelligent responses. The project is modular and ready for integration with AI models like Gemini 2.0 Flash.
+
+---
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm (Node Package Manager)
+
+---
+```
+## Project Structure
+
+ptw_agent/
+├── agent.js
+├── dummy.js
+├── functions.js
+├── index.js
+├── package.json
+├── package-lock.json
+├── routes/
+│ └── chat.js
+├── vercel.json
+└── .gitignore 
+
+```
+
+
+---
+
+## Setup & Installation
+
+1. **Clone the repository:**
+
+bash
+git clone https://github.com/kalesha58/ptw_agent.git
+cd ptw_agent
+
+```bash
+npm install
+
+node index.js
+
+```
+
+The server will start on http://localhost:3000. You can test your endpoints using Postman, curl, or any API client.
+
 ## 🚀 Deploying a Node.js Express Application to Vercel
 
 This guide will walk you through the process of deploying your Node.js Express application to Vercel as a serverless function.
