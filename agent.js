@@ -33,43 +33,43 @@ export async function chatLoop(userMessage) {
 
     switch (fnName) {
       case "getPermitDetails":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}`;
         break;
       case "getPermitStatus":
         const queryParams = fnArgs.includeHistory
           ? "?includeHistory=true"
           : "?includeHistory=false";
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/status${queryParams}`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/status${queryParams}`;
         break;
       case "searchPermitsByTaskName":
-        apiUrl = `http://localhost:3000/permits/search/task?taskName=${encodeURIComponent(fnArgs.taskName)}`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/search/task?taskName=${encodeURIComponent(fnArgs.taskName)}`;
         break;
       case "getSafetyRequirements":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/safety`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/safety`;
         break;
       case "getIsolationProcedures":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/isolation`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/isolation`;
         break;
       case "getContractorInfo":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/contractor`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/contractor`;
         break;
       case "getCompanyWorkers":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/workers`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/workers`;
         break;
       case "getEmergencyProcedures":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/emergency`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/emergency`;
         break;
       case "getApprovers":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/approvers`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/approvers`;
         break;
       case "getPermitHistory":
-        apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/history`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/history`;
         break;
       case "searchPermitsByRequester":
-        apiUrl = `http://localhost:3000/permits/search/requester?requester=${encodeURIComponent(fnArgs.requester)}`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/search/requester?requester=${encodeURIComponent(fnArgs.requester)}`;
         break;
       case "listActivePermitsByDepartment":
-        apiUrl = `http://localhost:3000/permits/active/department/${encodeURIComponent(fnArgs.department)}`;
+        apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/active/department/${encodeURIComponent(fnArgs.department)}`;
         break;
       default:
         return `Error: Unknown function ${fnName}`;
