@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 // Utility to find a permit by ID (case‑insensitive)
 function findPermitById(id) {
   return dummyPermits.find(
-    (p) => p.permitId.toLowerCase() === id.toLowerCase()
+    (p) => p.PermitNo.toLowerCase() === id.toLowerCase()
   );
 }
 
@@ -37,7 +37,7 @@ app.get("/permits/:id/status", (req, res) => {
   if (!permit)
     return res.status(404).json({ success: false, error: "Permit not found" });
   const response = {
-    permitId: permit.permitId,
+    PermitNo: permit.PermitNo,
     currentStatus: permit.currentStatus,
   };
   if (includeHistory) {
@@ -95,7 +95,7 @@ app.get("/permits/:id/safety", (req, res) => {
     permit.safetyRequirements || {};
   res.json({
     success: true,
-    data: { permitId: permit.permitId, hazards, riskLevels, controlMeasures, riskAssessmentDocId },
+    data: { PermitNo: permit.PermitNo, hazards, riskLevels, controlMeasures, riskAssessmentDocId },
   });
 });
 
@@ -113,7 +113,7 @@ app.get("/permits/:id/isolation", (req, res) => {
   } = permit.isolationProcedures || {};
   res.json({
     success: true,
-    data: { permitId: permit.permitId, isolationSteps, deIsolationSteps, lockoutRequired, lotoDetails },
+    data: { PermitNo: permit.PermitNo, isolationSteps, deIsolationSteps, lockoutRequired, lotoDetails },
   });
 });
 
@@ -127,7 +127,7 @@ app.get("/permits/:id/contractor", (req, res) => {
     permit.contractorInfo || {};
   res.json({
     success: true,
-    data: { permitId: permit.permitId, contractorCompany, contractorSupervisor, contractorPersonnelCount },
+    data: { PermitNo: permit.PermitNo, contractorCompany, contractorSupervisor, contractorPersonnelCount },
   });
 });
 
@@ -138,7 +138,7 @@ app.get("/permits/:id/workers", (req, res) => {
   if (!permit)
     return res.status(404).json({ success: false, error: "Permit not found" });
   const { companyWorkers } = permit || {};
-  res.json({ success: true, data: { permitId: permit.permitId, companyWorkers } });
+  res.json({ success: true, data: { PermitNo: permit.PermitNo, companyWorkers } });
 });
 
 // 10. GET /permits/:id/emergency → getEmergencyProcedures
@@ -151,7 +151,7 @@ app.get("/permits/:id/emergency", (req, res) => {
     permit.emergencyProcedures || {};
   res.json({
     success: true,
-    data: { permitId: permit.permitId, emergencyContacts, evacuationRoutes, firstAidLocations, procedures },
+    data: { PermitNo: permit.PermitNo, emergencyContacts, evacuationRoutes, firstAidLocations, procedures },
   });
 });
 
@@ -162,7 +162,7 @@ app.get("/permits/:id/approvers", (req, res) => {
   if (!permit)
     return res.status(404).json({ success: false, error: "Permit not found" });
   const { approvers } = permit || {};
-  res.json({ success: true, data: { permitId: permit.permitId, approvers } });
+  res.json({ success: true, data: { PermitNo: permit.PermitNo, approvers } });
 });
 
 // 12. GET /permits/:id/history → getPermitHistory
@@ -172,8 +172,34 @@ app.get("/permits/:id/history", (req, res) => {
   if (!permit)
     return res.status(404).json({ success: false, error: "Permit not found" });
   const { history } = permit || {};
-  res.json({ success: true, data: { permitId: permit.permitId, history } });
+  res.json({ success: true, data: { PermitNo: permit.PermitNo, history } });
 });
+
+
+// Example: GET /permits/search/natural?permitId=123&taskName=painting&requester=John&department=Operations
+
+app.get('/permits/search/natural', async (req, res) => {
+  const { permitId, taskName, requester, department } = req.query;
+
+  // Build query object dynamically
+  const query = {};
+  if (permitId) query.permitId = permitId;
+  if (taskName) query.taskName = { $regex: taskName, $options: "i" };
+  if (requester) query.requester = { $regex: requester, $options: "i" };
+  if (department) query.department = { $regex: department, $options: "i" };
+  
+
+  try {
+      const permit = findPermitById(id);
+
+    // Assuming you have a Permit model
+    const results = await permit.find(query).limit(50);  // limit to 50 results
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to search permits." });
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
