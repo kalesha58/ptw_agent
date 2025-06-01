@@ -3,8 +3,25 @@ import express from "express";
 import bodyParser from "body-parser";
 import dummyPermits from "../dummy.js";
 import chatRouter from "../routes/chat.js";
+import cors from "cors"; 
+
 const app = express();
 app.use(bodyParser.json());
+
+const allowedOrigins = ['https://ptw-agent-i5nb.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
+app.options('*', cors());
 
 app.use('/api/chat', chatRouter);
 
