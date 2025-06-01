@@ -60,20 +60,20 @@ export async function chatLoop(userMessage) {
     try {
       const encode = encodeURIComponent;
       switch (fnName) {
-        case "getPermitDetails": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}`; break;
+        case "getPermitDetails": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}`; break;
         case "getPermitStatus":
-          apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/status?includeHistory=${!!fnArgs.includeHistory}`;
+          apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/status?includeHistory=${!!fnArgs.includeHistory}`;
           break;
-        case "searchPermitsByTaskName": apiUrl = `http://localhost:3000/permits/search/task?taskName=${encode(fnArgs.taskName)}`; break;
-        case "getSafetyRequirements": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/safety`; break;
-        case "getIsolationProcedures": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/isolation`; break;
-        case "getContractorInfo": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/contractor`; break;
-        case "getCompanyWorkers": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/workers`; break;
-        case "getEmergencyProcedures": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/emergency`; break;
-        case "getApprovers": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/approvers`; break;
-        case "getPermitHistory": apiUrl = `http://localhost:3000/permits/${fnArgs.permitId}/history`; break;
-        case "searchPermitsByRequester": apiUrl = `http://localhost:3000/permits/search/requester?requester=${encode(fnArgs.requester)}`; break;
-        case "listActivePermitsByDepartment": apiUrl = `http://localhost:3000/permits/active/department/${encode(fnArgs.department)}`; break;
+        case "searchPermitsByTaskName": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/search/task?taskName=${encode(fnArgs.taskName)}`; break;
+        case "getSafetyRequirements": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/safety`; break;
+        case "getIsolationProcedures": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/isolation`; break;
+        case "getContractorInfo": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/contractor`; break;
+        case "getCompanyWorkers": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/workers`; break;
+        case "getEmergencyProcedures": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/emergency`; break;
+        case "getApprovers": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/approvers`; break;
+        case "getPermitHistory": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/${fnArgs.permitId}/history`; break;
+        case "searchPermitsByRequester": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/search/requester?requester=${encode(fnArgs.requester)}`; break;
+        case "listActivePermitsByDepartment": apiUrl = `https://ptw-agent-i5nb.vercel.app/permits/active/department/${encode(fnArgs.department)}`; break;
         default:
           return { type: "error", errorCode: "UNKNOWN_FUNCTION", message: `Unknown function ${fnName}`, httpStatus: 400 };
       }
